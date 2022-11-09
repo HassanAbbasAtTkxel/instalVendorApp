@@ -29,7 +29,7 @@ function HomeScreen(props) {
 
   const { vendor } = useSingleVendor(
     config.tables.vendorsTableName,
-    currentUser?.userID,
+    currentUser?.vendorID,
   )
 
   useLayoutEffect(() => {
@@ -51,17 +51,15 @@ function HomeScreen(props) {
   }, [navigation, categories, vendor])
 
   useEffect(() => {
-    console.log('currentUser', currentUser)
-    // if (!vendor?.id) {
-    //   console.log('ASDSd', vendor)
-    //   return
-    // }
-    console.log('ASD123Sd')
+    if (!vendor?.id) {
+      return
+    }
+
     setLoading(true)
 
     const unsubscribeProfessionals =
       professionalsAPIManager.subscribeVendorProfessionals(
-        '123123123123123123',
+        vendor?.id,
         onProfessionalsUpdate,
       )
     const unsubscribeCategories = categoriesAPIManager.subscribeCategories(

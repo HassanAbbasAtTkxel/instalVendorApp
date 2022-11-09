@@ -239,6 +239,8 @@ function EditVendorScreen(props) {
             if (success) {
               setLoading(false)
               onCancel()
+            } else {
+              alert(error)
             }
           },
         )
